@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUNCHLIST — get it done</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>✅</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Karla:wght@400;500;700&family=Space+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<span class="float f1"></span><span class="float f2"></span>
+<span class="float f3"></span><span class="float f4"></span>
+
+<main>
+  <!-- ============ AUTH SCREEN ============ -->
+  <section id="authScreen" class="screen">
+    <div class="auth-grid">
+      <div class="pitch">
+        <div class="brand">✷ PUNCHLIST</div>
+        <h1>GET IT<br><span class="rot" id="rotWord">DONE.</span></h1>
+        <p class="sub">A featherweight to-do board. Sign in, throw your tasks at it, tick them off — the good feeling is free.</p>
+        <ul class="demo-list" aria-hidden="true">
+          <li><span class="box"></span><span class="txt">ship the demo</span></li>
+          <li><span class="box"></span><span class="txt">email sam back</span></li>
+          <li><span class="box"></span><span class="txt">water the ferns</span></li>
+        </ul>
+        <p class="mono-note">// login · register · create / read / update / delete</p>
+      </div>
+
+      <div class="card auth-card" id="authCard">
+        <div class="tabs" role="tablist">
+          <button class="tab active" id="tabLogin" type="button">Sign in</button>
+          <button class="tab" id="tabRegister" type="button">Register</button>
+        </div>
+        <form id="authForm" novalidate>
+          <div class="field" id="nameField" hidden>
+            <label for="name">Your name</label>
+            <input id="name" type="text" placeholder="Ada Lovelace" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@somewhere.com" autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="pass">Password</label>
+            <input id="pass" type="password" placeholder="min. 6 characters" autocomplete="current-password">
+          </div>
+          <p class="err" id="authErr"></p>
+          <button class="btn btn-orange" id="authSubmit" type="submit">Sign in →</button>
+        </form>
+        <p class="switch-hint" id="switchHint">New here? <a id="switchLink">Create an account</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ APP SCREEN ============ -->
+  <section id="appScreen" class="screen" hidden>
+    <header class="appbar">
+      <span class="brand">✷ PUNCHLIST</span>
+      <span class="date" id="today"></span>
+      <span class="spacer"></span>
+      <span class="chip"><span class="av" id="avatar">A</span><span id="userName"></span></span>
+      <button class="btn btn-ghost" id="logoutBtn">Log out</button>
+    </header>
+
+    <h2 class="hello">Hey <em id="helloName"></em> — what's the plan?</h2>
+
+    <div class="stats">
+      <div><div class="big" id="totalNum">00</div><div class="lbl">tasks</div></div>
+      <div class="bar"><div class="fill" id="progFill"></div></div>
+      <div><div class="big" id="doneNum">00</div><div class="lbl">done</div></div>
+    </div>
+
+    <!-- CREATE -->
+    <form class="composer card" id="composer">
+      <input type="text" id="todoInput" placeholder="Type a task, hit Enter…" maxlength="140" autocomplete="off">
+      <div class="prio">
+        <input type="radio" name="prio" value="low"  id="pLow"><label for="pLow"><span class="dot dot-low"></span>LOW</label>
+        <input type="radio" name="prio" value="med"  id="pMed" checked><label for="pMed"><span class="dot dot-med"></span>MED</label>
+        <input type="radio" name="prio" value="high" id="pHigh"><label for="pHigh"><span class="dot dot-high"></span>HIGH</label>
+      </div>
+      <button class="btn btn-orange" style="width:auto;margin:0" type="submit">+ Add</button>
+    </form>
+
+    <div class="filters">
+      <button class="fbtn active" data-f="all">ALL <span id="cAll">0</span></button>
+      <button class="fbtn" data-f="active">ACTIVE <span id="cActive">0</span></button>
+      <button class="fbtn" data-f="done">DONE <span id="cDone">0</span></button>
+    </div>
+
+    <!-- READ -->
+    <ul class="list" id="list"></ul>
+    <div class="empty" id="empty" hidden>
+      <div class="big" id="emptyTitle">ALL CLEAR.</div>
+      <p id="emptySub">Add your first task above ↑</p>
+    </div>
+  </section>
+</main>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

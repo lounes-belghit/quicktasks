@@ -1,0 +1,43 @@
+### the main route 
+GET http://localhost:5000/
+### aouth routes 
+###login will return a token that can be used to access the protected routes and status of 200 if the user is authenticated, otherwise it will return a status of 401 if the user is not authenticated 404 if the user does not exist and 503 if the user is not authenticated successfully
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "test"
+}
+### register will create a new user and return a status of 201  and a jwt token if the user is created successfully, otherwise it will return a status of 503 if the user is not created successfully
+
+POST http://localhost:5000/auth/register
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "testuser@example.com",
+  "password": "testpassword"
+}
+### the todo routs 
+GET http://localhost:5000/todos/
+Authorization: <token>
+###add a task 
+POST http://localhost:5000/todos/
+Authorization: <token>
+Content-Type: application/json
+
+{
+  "title": "test to add a task"
+}
+### update the status of a task
+PUT http://localhost:5000/todos/1
+Authorization: <token>
+Content-Type: application/json
+
+{
+  "status": 1
+}
+### delete a task 
+DELETE http://localhost:5000/todos/1
+Authorization: <token>
